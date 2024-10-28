@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development Club</title>
+    <style>
+        /* Basic CSS styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Heading styling */
+        h1 {
+            font-size: 3em;
+            text-align: center;
+            margin-top: 50px;
+            color: #333;
+        }
+
+        /* Description styling */
+        .description {
+            max-width: 90%;
+            margin: 20px;
+            padding: 0 20px;
+            font-size: 1.2em;
+            text-align: center;
+            color: #666;
+        }
+
+        /* Horizontal line styling */
+        .divider-line {
+            width: 90%;
+            margin: 10px auto;
+            border: none;
+            height: 1px;
+            background-color: #ccc;
+        }
+
+        /* Add Group Button styling */
+        .add-group-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            color: white;
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .add-group-button:hover {
+            background-color: #555;
+        }
+
+        /* Existing Groups container styling */
+        .existing-groups {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .group-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        /* Styling for individual group cards */
+        .group-card {
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .group-card h4 {
+            margin: 0;
+            color: #333;
+        }
+
+        .group-card p {
+            margin: 5px 0 0;
+            color: #666;
+        }
+
+        .student-count {
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #999;
+        }
+
+        /* Chat Popup styles */
+        .chat-popup {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1; /* Sit on top */
+            left: 50%; /* Center the popup */
+            top: 50%; /* Center the popup */
+            transform: translate(-50%, -50%); /* Center the popup */
+            border: 1px solid #888;
+            border-radius: 8px;
+            width: 400px; /* Width of the chat box */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+        }
+
+        .chat-header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .chat-body {
+            height: 300px; /* Height of the chat area */
+            overflow-y: auto; /* Enable vertical scrollbar */
+            padding: 10px;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .chat-input button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+        }
+
+        .chat-input button:hover {
+            background-color: #555;
+        }
+
+        /* Add Group Modal styles */
+        .add-group-popup {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1; /* Sit on top */
+            left: 50%; /* Center the popup */
+            top: 50%; /* Center the popup */
+            transform: translate(-50%, -50%); /* Center the popup */
+            border: 1px solid #888;
+            border-radius: 8px;
+            width: 400px; /* Width of the add group box */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+            padding: 20px;
+        }
+
+        .add-group-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .add-group-input {
+            margin-bottom: 15px;
+        }
+
+        .add-group-input input {
+            width: 95%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .add-group-button-modal {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .add-group-button-modal:hover {
+            background-color: #555;
+        }
+
+        /* Delete Button styles */
+        .delete-group-button {
+            background-color: #e74c3c;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .delete-group-button:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Add Group Button -->
+    <a href="#" class="add-group-button" onclick="openAddGroup()">Add Group</a>
+
+    <!-- Page Heading -->
+    <h1>Web Development Club</h1>
+
+    <!-- Description Section -->
+    <div class="description">
+        <p>
+            The Web Development Club is a creative space for students passionate about building websites and applications. Whether you're a beginner or an experienced coder, this club offers workshops, coding sessions, and collaborative projects to enhance your skills. Members can explore front-end and back-end development, work on real-world projects, and gain insights into the latest web technologies.
+        </p>
+    </div>
+
+    <!-- Divider Line -->
+    <hr class="divider-line">
+
+    <!-- Existing Groups Section -->
+    <div class="existing-groups" id="existingGroups">
+        <h3 class="group-title">Groups</h3>
+        
+        <!-- Group Card 1 -->
+        <div class="group-card">
+            <h4>Front-End Development Group</h4>
+            <p>Focuses on HTML, CSS, and JavaScript, helping members enhance their skills in front-end technologies.</p>
+            <div class="student-count">Students: 25</div>
+            <button onclick="openChat()" class="open-chat-button">Chat</button>
+        </div>
+
+        <!-- Group Card 2 -->
+        <div class="group-card">
+            <h4>Back-End Development Group</h4>
+            <p>Explores server-side programming with Node.js, databases, and APIs for building robust web applications.</p>
+            <div class="student-count">Students: 18</div>
+            <button onclick="openChat()" class="open-chat-button">Chat</button>
+        </div>
+
+        <!-- Group Card 3 -->
+        <div class="group-card">
+            <h4>Full-Stack Projects Group</h4>
+            <p>Collaborates on full-stack projects to gain hands-on experience in both front-end and back-end development.</p>
+            <div class="student-count">Students: 15</div>
+            <button onclick="openChat()" class="open-chat-button">Chat</button>
+        </div>
+    </div>
+
+    <!-- Chat Popup -->
+    <div id="chatPopup" class="chat-popup">
+        <div class="chat-header">
+            <h4>Chat</h4>
+            <span onclick="closeChat()" style="cursor:pointer; float:right;">&times;</span>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <p>Welcome to the chat!</p>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="messageInput" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- Add Group Popup -->
+    <div id="addGroupPopup" class="add-group-popup">
+        <div class="add-group-header">
+            <h4>Add New Group</h4>
+        </div>
+        <div class="add-group-input">
+            <input type="text" id="groupName" placeholder="Group Name" required>
+        </div>
+        <div class="add-group-input">
+            <input type="text" id="groupDescription" placeholder="Group Description" required>
+        </div>
+        <button class="add-group-button-modal" onclick="addGroup()">Add Group</button>
+    </div>
+
+    <script>
+        // Function to open the chat popup
+        function openChat() {
+            document.getElementById('chatPopup').style.display = "block";
+        }
+
+        // Function to close the chat popup
+        function closeChat() {
+            document.getElementById('chatPopup').style.display = "none";
+        }
+
+        // Function to send a message
+        function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const chatBody = document.getElementById('chatBody');
+            const message = messageInput.value;
+
+            if (message) {
+                const newMessage = document.createElement('p');
+                newMessage.innerText = "You: " + message;
+                chatBody.appendChild(newMessage);
+                messageInput.value = ''; // Clear input after sending
+                chatBody.scrollTop = chatBody.scrollHeight; // Scroll to the bottom
+            }
+        }
+
+        // Function to open the Add Group modal
+        function openAddGroup() {
+            document.getElementById('addGroupPopup').style.display = "block";
+        }
+
+        // Function to close the Add Group modal
+        function closeAddGroup() {
+            document.getElementById('addGroupPopup').style.display = "none";
+        }
+
+        // Function to add a new group
+        function addGroup() {
+            const groupName = document.getElementById('groupName').value;
+            const groupDescription = document.getElementById('groupDescription').value;
+            const existingGroups = document.getElementById('existingGroups');
+
+            if (groupName && groupDescription) {
+                const newGroupCard = document.createElement('div');
+                newGroupCard.classList.add('group-card');
+
+                const groupTitle = document.createElement('h4');
+                groupTitle.innerText = groupName;
+
+                const groupDesc = document.createElement('p');
+                groupDesc.innerText = groupDescription;
+
+                const studentCount = document.createElement('div');
+                studentCount.classList.add('student-count');
+                studentCount.innerText = "Students: 0"; // Default count
+
+                const chatButton = document.createElement('button');
+                chatButton.innerText = "Chat";
+                chatButton.onclick = openChat; // Link to chat function
+
+                const deleteButton = document.createElement('button');
+                deleteButton.innerText = "Delete";
+                deleteButton.classList.add('delete-group-button');
+                deleteButton.onclick = function() { deleteGroup(deleteButton); }; // Link to delete function
+
+                newGroupCard.appendChild(groupTitle);
+                newGroupCard.appendChild(groupDesc);
+                newGroupCard.appendChild(studentCount);
+                newGroupCard.appendChild(chatButton);
+                newGroupCard.appendChild(deleteButton);
+                existingGroups.appendChild(newGroupCard); // Add new group to existing groups
+
+                // Clear input fields
+                document.getElementById('groupName').value = '';
+                document.getElementById('groupDescription').value = '';
+
+                closeAddGroup(); // Close the modal
+            }
+        }
+
+        // Function to delete a group
+        function deleteGroup(button) {
+            const groupCard = button.parentElement; // Get the parent group card
+            groupCard.remove(); // Remove the group card from the DOM
+        }
+
+        // Close the chat when the user clicks outside of it
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('chatPopup')) {
+                closeChat();
+            } else if (event.target == document.getElementById('addGroupPopup')) {
+                closeAddGroup();
+            }
+        }
+    </script>
+</body>
+</html>

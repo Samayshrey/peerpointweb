@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Our Website</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background: url(ayush.jpg);
+    background-size: cover;
+    background-size: 105%;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* aligns content toward the top */
+    min-height: 100vh; /* full viewport height */
+    margin: 0;
+    padding-top: 180px; /* replaces margin-top */
+  }
+        h1 {
+            margin-bottom: 15px;
+            font-size: 5rem;
+
+        }
+        p {
+            max-width: 50%;
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+        .first{
+            align-items: center;
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            
+        }
+        .second {
+            margin-left:200px;
+            margin-right: 350Px;
+            margin-bottom: 15px;
+            width: 60%;
+            text-align: left;
+        }
+        .third {
+            
+            margin-left: 700Px;
+            margin-right:0px;
+            margin-bottom: 15px;
+            width: 60%;
+            text-align: left;
+        }
+        
+        .register-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #060708;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .register-button:hover {
+            background-color: #0056b3;
+        }
+        /* Remove gaps around page */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+/* Footer Wrapper */
+.foot {
+  width: 100%;
+  height: auto;
+  background-color: #333;
+  color: white;
+}
+
+/* Footer Layout */
+footer {
+  padding: 20px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-section {
+  flex: 1;
+  padding: 0 20px;
+}
+
+/* FAQ Section */
+.faq h3,
+.contact h3 {
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+footer p {
+  margin-bottom: 5px;
+}
+
+/* Centering FAQ on the left, Contact Us on the right */
+.faq {
+  text-align: left;
+}
+
+.contact {
+  text-align: right;
+}
+
+/* Optional styling for links/buttons */
+.register-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #060708;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.register-button:hover {
+  background-color: #0056b3;
+}
+
+img {
+  opacity: 0.5;
+}
+    </style>
+</head>
+<body>
+  <div class="first">
+    <h1><b> Welcome to PeerPoint </b><br><br></h1>
+       
+    <a href="login1.html" class="register-button">Register</a>
+    <p style="text-align:center;">
+        <br><b>We’re excited to have you join us! Student Peer is your hub for collaboration, connection,
+         and growth. <br>Here, you can explore interests, collaborate on projects, and connect with fellow students.</b>
+   <br><br></p>
+
+   <div class="second">
+    <h2> Getting started</h2>
+    <p>create your profile, browse diverse groups, and join those that resonate with you. 
+        From science to the arts, each community is a space for sharing ideas and support.<br><br>
+    </p>
+   </div>
+
+   <div class="third">
+      <h2>Explore Groups</h2>
+   <p>Discover a wide range of communities tailored to different subjects. Share knowledge,
+     brainstorm ideas, and work on meaningful projects with others.<br><br></p>
+   </div>
+
+   <div class="second">
+    <h2>Collaborate & Create</h2>
+   <p> Engage in real-time collaboration on projects that matter to you, enhancing your
+     academic experience.<br><br></p>
+   </div>
+
+   <div class="third">
+    <h2>Mentorship & Support</h2>
+ <p>Seek advice and share experiences in a supportive community, with discussion 
+    forums and resource sharing.<br><br></p>
+ </div>
+  </div>
+  <div class="foot">
+    <footer>
+      <div class="footer-container">
+        <!-- Left Section: FAQ -->
+        <div class="footer-section faq">
+          <h3>Frequently Asked Questions</h3>
+          <p>Q: How do I join a group?</p>
+          <p>A: Go to the Groups section, search for a group, and click "Join".</p>
+          <p>Q: Can I create my own group?</p>
+          <p>A: Yes! Navigate to "Groups" and select "Create Group" to start your own.</p>
+        </div>
+  
+        <!-- Right Section: Contact Us -->
+        <div class="footer-section contact">
+          <h3>Contact Us</h3>
+          <p>Email: support@studentpeer.com</p>
+          <p>Phone: +123 456 7890</p>
+        </div>
+      </div>
+    </footer>
+  
+    <script>
+      // Smooth scrolling function
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+    </div>
+       
+</body>
+</html>
